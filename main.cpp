@@ -393,6 +393,19 @@ int main()
 				r.del_record();
 				continue;
 			}
+
+			if(ls_command[1] == "record" or ls_command[1] == "-r")
+			{    
+				string name;
+				if(ls_command[2] == "block" or ls_command[2] == "-b")
+				{    
+					name = ls_command[3];
+					b.get_block(name).del_record();
+					continue;
+				}
+				r.del_record();
+				continue;
+			}
 			
 		}
 	
