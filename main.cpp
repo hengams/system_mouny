@@ -162,13 +162,6 @@ void blocks::del_block()
 	}	
 }
 
-void blocks::del_block(int index)
-{
-        show_blocks();
-	list_blocks.erase(list_blocks.begin() + index);
-              
-}
-
 void blocks::add_block(string name)
 {
 	list_blocks.push_back(block(name));
@@ -394,6 +387,13 @@ int main()
 				b.del_block();
 				continue;
 			}
+
+			if(ls_command[1] == "input" or ls_command[1] == "-i")
+			{    
+				r.del_record();
+				continue;
+			}
+			
 		}
 	
 		// ALLOCATION
