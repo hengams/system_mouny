@@ -4,23 +4,6 @@
 
 using namespace std;
 
-#define RESET       "\033[0m"
-#define BLACK       "\033[30m"      
-#define RED         "\033[31m"     
-#define GREEN       "\033[32m"     
-#define YELLOW      "\033[33m"     
-#define BLUE        "\033[34m"     
-#define MAGENTA     "\033[35m"     
-#define CYAN        "\033[36m"     
-#define WHITE       "\033[37m"     
-#define BOLDBLACK   "\033[1m\033[30m"     
-#define BOLDRED     "\033[1m\033[31m"     
-#define BOLDGREEN   "\033[1m\033[32m"     
-#define BOLDYELLOW  "\033[1m\033[33m"    
-#define BOLDBLUE    "\033[1m\033[34m"     
-#define BOLDMAGENTA "\033[1m\033[35m"    
-#define BOLDCYAN    "\033[1m\033[36m"     
-#define BOLDWHITE   "\033[1m\033[37m"    
 
 ////////////////////////////////////////////////
 
@@ -93,34 +76,34 @@ void block::add_record(int val, string comment)
 
 void block::show_records()
 {
-	cout << BLUE << "list record block " << name << RESET << endl;
+	cout << "list record block " << name << endl;
 
 	for(int i = 0; i < list_records.size(); i++)
 	{
-		cout << BLUE <<"id : " << i + 1;
+		cout << "id : " << i + 1;
 		cout << "	";
 		cout << "val : " << list_records[i].val;
 		cout << "	";
-		cout << "comment : " <<  list_records[i].comment << RESET << endl;
+		cout << "comment : " <<  list_records[i].comment << endl;
 	} 
 }
 
 void block::show_detail(int id)
 {
-	cout << BLUE << "id: " << id;
+	cout << "id: " << id;
 	cout << "	";
 	cout << "name: " << name;
 	cout << "	";
 	cout << "val: " << val;
-	cout << RESET << endl;
+	cout << endl;
 }
 
 void block::show_detail()
 {
-	cout << BLUE << "name: " << name;
+	cout << "name: " << name;
 	cout << "	";
 	cout << "val: " << val;
-	cout << RESET << endl;
+	cout << endl;
 	show_records();
 }
 
@@ -147,7 +130,7 @@ block& blocks::get_block(string name)
 void blocks::show_blocks()
 {
 
-	cout << BLUE << "list blocks:" << RESET <<endl;
+	cout << "list blocks:" << endl;
 
 	for(int i = 0; i < list_blocks.size(); i++)
 	{
@@ -255,7 +238,7 @@ void repository::add_record(int val, string comment)
 
 void repository::show_records()
 {
-	cout << BLUE << "list record repository " << endl;
+	cout << "list record repository " << endl;
 
 	for(int i = 0; i < list_records.size(); i++)
 	{
@@ -263,15 +246,15 @@ void repository::show_records()
 		cout << "	";
 		cout << "val : " << list_records[i].val;
 		cout << "	";
-		cout << "comment : " <<  list_records[i].comment << RESET << endl;
+		cout << "comment : " <<  list_records[i].comment << endl;
 	} 
 }
 
 void repository::show_detail()
 {
-	cout <<  BLUE << "repository: " << endl;
+	cout << "repository: " << endl;
 	cout << "val: " << val;
-	cout << RESET << endl;
+	cout << endl;
 	show_records();
 }
 
