@@ -134,6 +134,7 @@ public:
 	void add_block(string name);
 	block& get_block(string name);
 	vector<block> list_blocks;
+	void del_block(int index);
 };
 
 block& blocks::get_block(string name)
@@ -145,6 +146,7 @@ block& blocks::get_block(string name)
 
 void blocks::show_blocks()
 {
+
 	cout << BLUE << "list blocks:" << RESET <<endl;
 
 	for(int i = 0; i < list_blocks.size(); i++)
@@ -155,22 +157,33 @@ void blocks::show_blocks()
 
 void blocks::del_block()
 {
-	int input;
+	string input;
+	int number;
 	show_blocks();
 
 	while(true)
 	{
 		cout << "input id block for deleted: " << endl;
-		cin >> input;
-		if(input >= 1 and input <= list_blocks.size())
+		//cin >> input;
+		getline(cin ,input);
+		number = stoi(input);
+
+		if(number >= 1 and number <= list_blocks.size())
 		{
-			cout << "block " << list_blocks[input - 1].get_name() << " is deleted" << endl;
-			list_blocks.erase(list_blocks.begin() + (input - 1));
+			cout << "block " << list_blocks[number - 1].get_name() << " is deleted" << endl;
+			list_blocks.erase(list_blocks.begin() + (number - 1));
 			break;
 		}
 		else
 			cout << "input number is not correct" << endl;
 	}	
+}
+
+void blocks::del_block(int index)
+{
+        show_blocks();
+	list_blocks.erase(list_blocks.begin() + index);
+              
 }
 
 void blocks::add_block(string name)
@@ -269,8 +282,8 @@ vector<string> read_command()
 	vector<string> list_command;
 	string command;
 	string word;
-
 	getline(cin ,command);
+
 	
 	for(int i = 0; i < command.size(); i++)
 	{
@@ -319,9 +332,9 @@ int main()
 	vector<string> ls_command;
 	
 	do{	
-		cout << "start while" << endl; 
 		ls_command = read_command();
-
+		if(ls_command.size() == 0)
+			ls_command.push_back("NOTHING");
 		// NEW
 		if(ls_command[0] == "new")
 		{
@@ -329,6 +342,7 @@ int main()
 			{
 				b.add_block(ls_command[2]);			
 				b.show_blocks();
+				continue;
 			}
 			
 			if(ls_command[1] == "input" or ls_command[1] == "-i")
@@ -347,6 +361,7 @@ int main()
 				}
 				r.add_record(val, comment);				
 				r.show_detail();
+				continue;
 			}
 		}
 	
@@ -359,11 +374,13 @@ int main()
 					b.show_blocks();
 				else
 					b.get_block(ls_command[2]).show_detail();
+				continue;
 			}
 			
 			if(ls_command[1] == "inputs" or ls_command[1] == "-i")
 			{
 				r.show_detail();
+				continue;
 			}
 		}
 		
@@ -382,14 +399,18 @@ int main()
 				if(ls_command[5] == "comment" or ls_command[5] == "-c")
 					comment = ls_command[6];
 			}
-			b.get_block(name).add_record(val, comment);
+			b.get_block(name).add_record(val, comment);\
+			continue;
 		}
 		
 		//DELETE
 		if(ls_command[0] == "del")
 		{
 			if(ls_command[1] == "block" or ls_command[1] == "-b")
+			{    
 				b.del_block();
+				continue;
+			}
 		}
 	
 		// ALLOCATION
@@ -407,9 +428,11 @@ int main()
 			cout << "block:" << name << endl;
 
 			r.allocation_mouny(val, b.get_block(name));
+			continue;
 		}
-		cout << "end while" << endl;
 
+		if(ls_command[0] != "exit")		
+			cout << "not command found" << endl;
 		
 	}
 	while(ls_command[0] != "exit");
