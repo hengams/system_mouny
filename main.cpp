@@ -403,8 +403,6 @@ int main()
 					b.get_block(name).del_record();
 					continue;
 				}
-				r.del_record();
-				continue;
 			}
 			
 		}
